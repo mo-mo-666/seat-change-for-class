@@ -1,11 +1,26 @@
 import random
-from typing import List
+import copy
+from abc import ABC, abstractmethod
+from typing import Sequence, Tuple
 
 
-class RandomInitializer:
-    def __init__(self, seat_places: List[Tuple[int, int]]):
-        self.seat_places = seat_places
+class AbstractInitializer(ABC):
+    def __init__(self):
+        pass
 
-    def transform(self, members: List[dict]):
-        places = random.sample(seat_places, len(members))
-        return places
+    @abstractmethod
+    def transform(
+        self, seat_places: Sequence[Tuple[int, int]], members: Sequence[dict]
+    ):
+        pass
+
+
+class RandomInitializer(AbstractInitializer):
+    def __init__(self):
+        super().__init__()
+
+    def transform(
+        self, seat_places: Sequence[Tuple[int, int]], members: Sequence[dict]
+    ):
+        mem_places = random.sample(seat_places, len(members))
+        return mem_places
