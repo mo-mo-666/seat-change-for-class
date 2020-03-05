@@ -4,6 +4,10 @@ from .initializer import RandomInitializer
 
 
 class SeatChange:
+    """
+    Seat change for classes.
+    """
+
     def __init__(
         self,
         losses: Iterable[object],
@@ -11,6 +15,21 @@ class SeatChange:
         iter_num: int = 10000,
         ch_step_range: Tuple[int, int] = (2, 4),
     ):
+        """
+        Parameters
+        ----------
+        losses : Iterable[object]
+            List of Loss instance.
+
+        initializer : object, optional
+            Initializer instance, by default RandomInitializer().
+
+        iter_num : int, optional
+            The number of iteration, by default 10000.
+
+        ch_step_range : Tuple[int, int], optional
+            The number of people to interchange in one step, by default (2, 4).
+        """
         self.losses = losses
         self.initializer = initializer
         self.iter_num = iter_num
@@ -20,6 +39,19 @@ class SeatChange:
     def change_one(
         self, mem_places: Sequence[Tuple[int, int]]
     ) -> List[Tuple[int, int]]:
+        """
+        One step change of the member's place.
+
+        Parameters
+        ----------
+        mem_places : Sequence[Tuple[int, int]]
+            The place of the members.
+
+        Returns
+        -------
+        List[Tuple[int, int]]
+            The new place of the members.
+        """
         num = len(mem_places)
         l, h = self.ch_step_range
         ch_num = random.randint(l, h)
@@ -33,7 +65,31 @@ class SeatChange:
         new_mem_places = [mem_places[i] for i in idx]
         return new_mem_places
 
-    def cal_loss(self, seat_places, members, mem_places) -> float:
+    def cal_loss(
+        self,
+        seat_places: Sequence[Tuple[int, int]],
+        members: Sequence[dict],
+        mem_places: Sequence[Tuple[int, int]],
+    ) -> float:
+        """
+        Calculate loss using loss instances.
+
+        Parameters
+        ----------
+        seat_places : Sequence[Tuple[int, int]]
+            The places of seats.
+
+        members : Sequence[dict]
+            Member list.
+
+        mem_places : Sequence[Tuple[int, int]]
+            The place of members.
+
+        Returns
+        -------
+        float
+            Loss.
+        """
         loss = 0
         for loss_obj in self.losses:
             loss += loss_obj.calculate(seat_places, members, mem_places)
@@ -42,6 +98,22 @@ class SeatChange:
     def transform(
         self, seat_places: Sequence[Tuple[int, int]], members: Sequence[dict]
     ) -> List[Tuple[int, int]]:
+        """
+        Search the appropriate seat place of each member.
+
+        Parameters
+        ----------
+        seat_places : Sequence[Tuple[int, int]]
+            The place of seats.
+
+        members : Sequence[dict]
+            Member list.
+
+        Returns
+        -------
+        List[Tuple[int, int]]
+            The place of members.
+        """
         self.loss_log = []
         mem_places = self.initializer.transform(seat_places, members)
         loss = self.cal_loss(seat_places, members, mem_places)
