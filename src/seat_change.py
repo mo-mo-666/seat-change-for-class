@@ -92,10 +92,10 @@ class SeatChange:
         """
         loss = 0
         for loss_obj in self.losses:
-            loss += loss_obj.calculate(seat_places, members, mem_places)
+            loss += loss_obj(seat_places, members, mem_places)
         return loss
 
-    def transform(
+    def solve(
         self, seat_places: Sequence[Tuple[int, int]], members: Sequence[dict]
     ) -> List[Tuple[int, int]]:
         """
@@ -115,7 +115,7 @@ class SeatChange:
             The place of members.
         """
         self.loss_log = []
-        mem_places = self.initializer.transform(seat_places, members)
+        mem_places = self.initializer(seat_places, members)
         loss = self.cal_loss(seat_places, members, mem_places)
         self.loss_log.append(loss)
 

@@ -15,7 +15,7 @@ class AbstractLoss(ABC):
         pass
 
     @abstractmethod
-    def calculate(
+    def __call__(
         self,
         seat_places: Sequence[Tuple[int, int]],
         members: Sequence[dict],
@@ -59,7 +59,7 @@ class HopeLoss(AbstractLoss):
         )
         return loss
 
-    def calculate(
+    def __call__(
         self,
         seat_places: Sequence[Tuple[int, int]],
         members: Sequence[dict],
@@ -71,7 +71,7 @@ class HopeLoss(AbstractLoss):
             if hopes == -1:
                 raise KeyError("Some member does not have 'hopes' key.")
             else:
-                loss += self._cal_one(hopes, place)
+                loss += self._cal_one(hopes, place) ** self.power
         return loss
 
 
@@ -85,7 +85,7 @@ class GlassesLoss(AbstractLoss):
     ) -> float:
         return (mem_place not in glasses) * self.weight
 
-    def calculate(
+    def __call__(
         self,
         seat_places: Sequence[Tuple[int, int]],
         members: Sequence[dict],
