@@ -121,7 +121,7 @@ class SeatChange:
 
         for _ in range(self.iter_num):
             new_mem_places = self.change_one(mem_places)
-            new_loss = self.loss.calculate(seat_places, members, new_mem_places)
+            new_loss = self.loss(seat_places, members, new_mem_places)
             if loss >= new_loss:
                 mem_places = new_mem_places
                 loss = new_loss
