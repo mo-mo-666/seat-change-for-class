@@ -3,7 +3,7 @@ from typing import Iterable, Union, Tuple, List, Sequence
 from .initializer import RandomInitializer
 
 
-class SeatChange:
+class SeatChanger:
     """
     Seat change for classes.
     """
@@ -19,10 +19,10 @@ class SeatChange:
         Parameters
         ----------
         losses : Iterable[object]
-            List of Loss instance.
+            List of Loss function (instance).
 
         initializer : object, optional
-            Initializer instance, by default RandomInitializer().
+            Initializer function (instance), by default RandomInitializer().
 
         iter_num : int, optional
             The number of iteration, by default 10000.
@@ -91,8 +91,8 @@ class SeatChange:
             Loss.
         """
         loss = 0
-        for loss_obj in self.losses:
-            loss += loss_obj(seat_places, members, mem_places)
+        for loss_func in self.losses:
+            loss += loss_func(seat_places, members, mem_places)
         return loss
 
     def solve(
@@ -121,7 +121,7 @@ class SeatChange:
 
         for _ in range(self.iter_num):
             new_mem_places = self.change_one(mem_places)
-            new_loss = self.loss(seat_places, members, new_mem_places)
+            new_loss = self.cal_loss(seat_places, members, new_mem_places)
             if loss >= new_loss:
                 mem_places = new_mem_places
                 loss = new_loss

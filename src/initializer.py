@@ -14,7 +14,7 @@ class AbstractInitializer(ABC):
     @abstractmethod
     def __call__(
         self, seat_places: Sequence[Tuple[int, int]], members: Sequence[dict]
-    ):
+    ) -> float:
         raise NotImplementedError("This method must be override and return float.")
 
 
@@ -24,6 +24,6 @@ class RandomInitializer(AbstractInitializer):
 
     def __call__(
         self, seat_places: Sequence[Tuple[int, int]], members: Sequence[dict]
-    ):
+    ) -> float:
         mem_places = random.sample(seat_places, len(members))
         return mem_places

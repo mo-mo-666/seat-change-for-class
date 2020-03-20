@@ -42,7 +42,7 @@ class HopeLoss(AbstractLoss):
     ) -> float:
         loss = min(
             [
-                abs(hope[0] - mem_place[0]) + abs(hope[1] - mem_place[1]) ** 2
+                abs(hope[0] - mem_place[0]) + abs(hope[1] - mem_place[1])
                 for hope in hopes
             ]
         )
@@ -53,7 +53,7 @@ class HopeLoss(AbstractLoss):
     ) -> float:
         loss = min(
             [
-                (hope[0] - mem_place[0]) ** 2 + (hope[1] - mem_place[1]) ** 2
+                ((hope[0] - mem_place[0]) ** 2 + (hope[1] - mem_place[1]) ** 2) ** (1/2)
                 for hope in hopes
             ]
         )
@@ -83,6 +83,8 @@ class GlassesLoss(AbstractLoss):
     def _cal_one(
         self, glasses: Sequence[Tuple[int, int]], mem_place: Tuple[int, int]
     ) -> float:
+        if not glasses:
+            return 0
         return (mem_place not in glasses) * self.weight
 
     def __call__(
