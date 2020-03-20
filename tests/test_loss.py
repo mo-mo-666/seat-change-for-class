@@ -1,16 +1,18 @@
 import unittest
 
-from src.loss import HopeLoss, GlassesLoss
+from stchger.loss import HopeLoss, GlassesLoss
 
 
 class TestHopeLoss(unittest.TestCase):
     def setUp(self):
         self.seat_places = ((0, 1), (0, 2), (1, 0), (1, 1), (1, 2))
-        self.members = ( {"num": 1, "hopes": [(0, 1)]},
-                         {"num": 2, "hopes": [(1, 0)]},
-                         {"num": 3, "hopes": [(0, 2), (1, 2)]},
-                         {"num": 4, "hopes": [(0, 1), (0, 2), (1, 2)]},
-                         {"num": 5, "hopes": list(self.seat_places)})
+        self.members = (
+            {"num": 1, "hopes": [(0, 1)]},
+            {"num": 2, "hopes": [(1, 0)]},
+            {"num": 3, "hopes": [(0, 2), (1, 2)]},
+            {"num": 4, "hopes": [(0, 1), (0, 2), (1, 2)]},
+            {"num": 5, "hopes": list(self.seat_places)},
+        )
         self.mem_places = list(self.seat_places)
 
     def test_call_(self):
@@ -27,11 +29,13 @@ class TestHopeLoss(unittest.TestCase):
 class TestGlassesLoss(unittest.TestCase):
     def setUp(self):
         self.seat_places = ((0, 1), (0, 2), (1, 0), (1, 1), (1, 2))
-        self.members = ( {"num": 1, "glasses": []},
-                         {"num": 2, "glasses": []},
-                         {"num": 3, "glasses": [(0, 1), (1, 0)]},
-                         {"num": 4, "glasses": [(0, 1), (1, 0)]},
-                         {"num": 5, "glasses": [(1, 2)]})
+        self.members = (
+            {"num": 1, "glasses": []},
+            {"num": 2, "glasses": []},
+            {"num": 3, "glasses": [(0, 1), (1, 0)]},
+            {"num": 4, "glasses": [(0, 1), (1, 0)]},
+            {"num": 5, "glasses": [(1, 2)]},
+        )
         self.mem_places = list(self.seat_places)
 
     def test_call_(self):

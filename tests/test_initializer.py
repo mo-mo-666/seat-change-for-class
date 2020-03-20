@@ -1,7 +1,7 @@
 import unittest
 import random
 
-from src.initializer import RandomInitializer
+from stchger.initializer import RandomInitializer
 
 
 class TestRandomInitializer(unittest.TestCase):
