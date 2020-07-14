@@ -1,6 +1,6 @@
 import random
 from typing import Iterable, Union, Tuple, List, Sequence
-from .initializer import RandomInitializer
+from initializer import RandomInitializer
 
 
 class SeatChanger:
