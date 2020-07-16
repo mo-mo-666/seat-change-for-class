@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Python exe-er
+name: Pyinstaller
 
 on: [push]
 
@@ -23,3 +23,8 @@ jobs:
     - name: build with pyinstaller
       run: |
         pyinstaller --onefile stchger/main.py
+    - name: upload
+            uses: actions/upload-artifact@v1
+            with:
+                name: windows exe
+                path: dist
