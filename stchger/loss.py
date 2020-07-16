@@ -8,6 +8,10 @@ logger = getLogger(__name__)
 
 
 class AbstractLoss(ABC):
+    """
+    Abstract class for loss class.
+    You must inherit this class if you want to make new loss classes.
+    """
 
     class_type = "Loss"
 
@@ -21,15 +25,42 @@ class AbstractLoss(ABC):
         members: Sequence[dict],
         mem_places: List[Tuple[int, int]],
     ) -> float:
+        """
+        Calculate loss.
+
+        Parameters
+        ----------
+        seat_places : Sequence[Tuple[int, int]]
+            All seat places.
+        members : Sequence[dict]
+            Members, i.e., students.
+        mem_places : List[Tuple[int, int]]
+            Members' seat places.
+
+        Returns
+        -------
+        float
+            The loss value.
+        """
         raise NotImplementedError("This method must be override and return float.")
 
 
 class HopeLoss(AbstractLoss):
+    """
+    Hope loss.
+
+    Note
+    ----------
+    Member directories must have 'hopes' key.
+    member['hopes'] == Sequence[Tuple[int, int]].
+    """
+
     def __init__(self, metric: str = "euclid", power: int = 2):
         super().__init__()
         metrics = ["manhattan", "euclid"]
         if metric not in metrics:
             raise ValueError(f"The argument 'metric' must be selected in {metrics}.")
+
         self.metric = metric
         self.power = power
         if self.metric == "manhattan":
@@ -40,6 +71,8 @@ class HopeLoss(AbstractLoss):
     def _manhattan_cal_one(
         self, hopes: Sequence[Tuple[int, int]], mem_place: Tuple[int, int]
     ) -> float:
+        if not hopes:
+            return 0.0
         loss = min(
             [
                 abs(hope[0] - mem_place[0]) + abs(hope[1] - mem_place[1])
@@ -51,6 +84,8 @@ class HopeLoss(AbstractLoss):
     def _euclid_cal_one(
         self, hopes: Sequence[Tuple[int, int]], mem_place: Tuple[int, int]
     ) -> float:
+        if not hopes:
+            return 0.0
         loss = min(
             [
                 ((hope[0] - mem_place[0]) ** 2 + (hope[1] - mem_place[1]) ** 2)
@@ -77,6 +112,15 @@ class HopeLoss(AbstractLoss):
 
 
 class GlassesLoss(AbstractLoss):
+    """
+    Glasses loss.
+
+    Note
+    ----------
+    Member directories must have 'glasses' key.
+    member['glasses'] == Sequence[Tuple[int, int]].
+    """
+
     def __init__(self, weight: float = 10000):
         super().__init__()
         self.weight = weight
