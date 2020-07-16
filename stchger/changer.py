@@ -97,7 +97,7 @@ class SeatChanger:
 
     def solve(
         self, seat_places: Sequence[Tuple[int, int]], members: Sequence[dict]
-    ) -> List[Tuple[int, int]]:
+    ) -> Tuple[Tuple[int, int]]:
         """
         Search the appropriate seat place of each member.
 
@@ -126,4 +126,5 @@ class SeatChanger:
                 mem_places = new_mem_places
                 loss = new_loss
             self.loss_log.append(loss)
+        mem_places = tuple(mem_places)
         return mem_places
