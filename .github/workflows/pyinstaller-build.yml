@@ -1,8 +1,10 @@
 # This is a basic workflow to help you get started with Actions
 
 name: Pyinstaller
-
-on: [push]
+on:
+  push:
+    tags:
+      - v*
 
 jobs:
   build:
@@ -26,5 +28,5 @@ jobs:
     - name: upload
       uses: actions/upload-artifact@v2
       with:
-        name: windows exe
+        name: application
         path: dist/seat_changer.exe
