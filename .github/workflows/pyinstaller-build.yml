@@ -22,4 +22,4 @@ jobs:
         pip install pyinstaller
     - name: build with pyinstaller
       run: |
-        pyinstaller --oneline stchger/main.py
+        pyinstaller --onefile stchger/main.py
