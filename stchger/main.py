@@ -1,7 +1,7 @@
-from setting_io import read_setting, write_setting
-from initializer import RandomInitializer, RandomGlassesInitializer
-from loss import HopeLoss, GlassesLoss
-from changer import SeatChanger
+from .setting_io import read_setting, write_setting
+from .initializer import RandomInitializer, RandomGlassesInitializer
+from .loss import HopeLoss, GlassesLoss
+from .changer import SeatChanger
 
 import os
 from typing import Tuple, Sequence
