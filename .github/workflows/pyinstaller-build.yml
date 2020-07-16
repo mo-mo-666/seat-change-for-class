@@ -24,7 +24,7 @@ jobs:
       run: |
         pyinstaller --onefile seat_changer.py
     - name: upload
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v2
       with:
         name: windows exe
         path: dist/seat_changer.exe
