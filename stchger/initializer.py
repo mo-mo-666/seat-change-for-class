@@ -44,4 +44,5 @@ class RandomGlassesInitializer(AbstractInitializer):
     def __call__(
         self, seat_places: Sequence[Tuple[int, int]], members: Sequence[dict]
     ) -> List[Tuple[int, int]]:
+        # TODO write this
         pass

@@ -100,7 +100,7 @@ def write_setting(path: str, datas: dict):
             elif k == "glasses":
                 v = 1 if m[k] else 0
             elif k == "mem_place":
-                v= coord_name[m[k]]
+                v = coord_name[m[k]]
             else:
                 v = m[k]
             ws.cell(row=j, column=i, value=v)
@@ -114,7 +114,6 @@ def write_setting(path: str, datas: dict):
     ws = wb.create_sheet("result_member_map")
     for m, (x, y) in zip(members, mem_places):
         ws.cell(row=y, column=x, value=m["name"])
-
 
     # write loss
     ws = wb.create_sheet("result_loss")

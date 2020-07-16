@@ -27,7 +27,9 @@ class TestReadSetting(unittest.TestCase):
 
     def test_seat_places(self):
         seat_places = set(self.datas["seat_places"])
-        ans = set([(i, j) for i in range(1, 8) for j in range(1, 8)]) - set([(1, 1), (7, 1)])
+        ans = set([(i, j) for i in range(1, 8) for j in range(1, 8)]) - set(
+            [(1, 1), (7, 1)]
+        )
         self.assertEqual(seat_places, ans)
 
     def test_glasses_desks(self):
