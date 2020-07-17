@@ -1,5 +1,7 @@
 # 席替え
 
+![test](https://github.com/mo-mo-666/seat-change-for-class/workflows/test/badge.svg)
+
 一つのクラスにおいて、生徒の希望に応じて席替えを行うアプリケーションです。
 
 ### 機能
@@ -18,59 +20,24 @@
 このシートには、各メンバー（生徒）の出席番号・名前・希望の席・前席考慮の有無についてのデータを記入します。
 例えば以下のようなものです。
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg .tg-cly1{text-align:left;vertical-align:middle}
-</style>
-<table class="tg">
-<thead>
-  <tr>
-    <th class="tg-cly1">出席番号</th>
-    <th class="tg-cly1">名前</th>
-    <th class="tg-cly1">希望</th>
-    <th class="tg-cly1">前席考慮</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td class="tg-cly1">number</td>
-    <td class="tg-cly1">name</td>
-    <td class="tg-cly1">hopes</td>
-    <td class="tg-cly1">glasses</td>
-  </tr>
-  <tr>
-    <td class="tg-cly1">1</td>
-    <td class="tg-cly1">川野 洵子</td>
-    <td class="tg-cly1">C2</td>
-    <td class="tg-cly1">1</td>
-  </tr>
-  <tr>
-    <td class="tg-cly1">2</td>
-    <td class="tg-cly1">堀江 銀之助</td>
-    <td class="tg-cly1">A3,A4</td>
-    <td class="tg-cly1">0</td>
-  </tr>
-  <tr>
-    <td class="tg-cly1">3</td>
-    <td class="tg-cly1">浜田 大夢</td>
-    <td class="tg-cly1">D6</td>
-    <td class="tg-cly1">0</td>
-  </tr>
-  <tr>
-    <td class="tg-cly1">4</td>
-    <td class="tg-cly1">新谷 一智</td>
-    <td class="tg-cly1">B3</td>
-    <td class="tg-cly1">0</td>
-  </tr>
-</tbody>
-</table>
+```text
++----------+-------------+-------+----------+
+| 出席番号 | 名前        | 希望  | 前席考慮 |
++----------+-------------+-------+----------+
+| number   | name        | hopes | glasses  |
++----------+-------------+-------+----------+
+| 1        | 川野 洵子   | C2    | 1        |
++----------+-------------+-------+----------+
+| 2        | 堀江 銀之助 | A3,A4 | 0        |
++----------+-------------+-------+----------+
+| 3        | 浜田 大夢   | D6    | 0        |
++----------+-------------+-------+----------+
+| 4        | 新谷 一智   | B3    | 0        |
++----------+-------------+-------+----------+
+```
 
 - 出席番号  
-出席番号を記入します。**必ず番号で記入してください。**
+出席番号を記入します。**必ず数字で記入してください。**
 
 - 名前  
 氏名を記入します。省略しても構いません。
@@ -89,83 +56,140 @@
 #### `desks_map`シート
 座席の位置と、上記hopesで用いる名前を指定します。例えば、以下のようなものです。
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg .tg-cly1{text-align:left;vertical-align:middle}
-</style>
-<table class="tg">
-<thead>
-  <tr>
-    <th class="tg-cly1"></th>
-    <th class="tg-cly1">B1</th>
-    <th class="tg-cly1">C1</th>
-    <th class="tg-cly1">D1</th>
-    <th class="tg-cly1">E1</th>
-    <th class="tg-cly1">F1</th>
-    <th class="tg-cly1"></th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td class="tg-cly1">A2</td>
-    <td class="tg-cly1">B2</td>
-    <td class="tg-cly1">C2</td>
-    <td class="tg-cly1">D2</td>
-    <td class="tg-cly1">E2</td>
-    <td class="tg-cly1">F2</td>
-    <td class="tg-cly1">G2</td>
-  </tr>
-  <tr>
-    <td class="tg-cly1">A3</td>
-    <td class="tg-cly1">B3</td>
-    <td class="tg-cly1">C3</td>
-    <td class="tg-cly1">D3</td>
-    <td class="tg-cly1">E3</td>
-    <td class="tg-cly1">F3</td>
-    <td class="tg-cly1">G3</td>
-  </tr>
-  <tr>
-    <td class="tg-cly1">A4</td>
-    <td class="tg-cly1">B4</td>
-    <td class="tg-cly1">C4</td>
-    <td class="tg-cly1">D4</td>
-    <td class="tg-cly1">E4</td>
-    <td class="tg-cly1">F4</td>
-    <td class="tg-cly1">G4</td>
-  </tr>
-  <tr>
-    <td class="tg-cly1">A5</td>
-    <td class="tg-cly1">B5</td>
-    <td class="tg-cly1">C5</td>
-    <td class="tg-cly1">D5</td>
-    <td class="tg-cly1">E5</td>
-    <td class="tg-cly1">F5</td>
-    <td class="tg-cly1">G5</td>
-  </tr>
-  <tr>
-    <td class="tg-cly1">A6</td>
-    <td class="tg-cly1">B6</td>
-    <td class="tg-cly1">C6</td>
-    <td class="tg-cly1">D6</td>
-    <td class="tg-cly1">E6</td>
-    <td class="tg-cly1">F6</td>
-    <td class="tg-cly1">G6</td>
-  </tr>
-  <tr>
-    <td class="tg-cly1">A7</td>
-    <td class="tg-cly1">B7</td>
-    <td class="tg-cly1">C7</td>
-    <td class="tg-cly1">D7</td>
-    <td class="tg-cly1">E7</td>
-    <td class="tg-cly1">F7</td>
-    <td class="tg-cly1">G7</td>
-  </tr>
-</tbody>
-</table>
+```text
++----+----+----+----+----+----+----+
+|    | B1 | C1 | D1 | E1 | F1 |    |
++----+----+----+----+----+----+----+
+| A2 | B2 | C2 | D2 | E2 | F2 | G2 |
++----+----+----+----+----+----+----+
+| A3 | B3 | C3 | D3 | E3 | F3 | G3 |
++----+----+----+----+----+----+----+
+| A4 | B4 | C4 | D4 | E4 | F4 | G4 |
++----+----+----+----+----+----+----+
+| A5 | B5 | C5 | D5 | E5 | F5 | G5 |
++----+----+----+----+----+----+----+
+| A6 | B6 | C6 | D6 | E6 | F6 | G6 |
++----+----+----+----+----+----+----+
+| A7 | B7 | C7 | D7 | E7 | F7 | G7 |
++----+----+----+----+----+----+----+
+```
+
+座席のある位置に一意の名前を記入してください。
+
+#### `glasses_desks`シート
+前席考慮の際の座席を指定します。例えば、以下のようなものです。
+
+```text
++--+--+----+----+----+--+--+
+|  |  | C1 | D1 | E1 |  |  |
++--+--+----+----+----+--+--+
+|  |  | C2 | D2 | E2 |  |  |
++--+--+----+----+----+--+--+
+|  |  | C3 | D3 | E3 |  |  |
++--+--+----+----+----+--+--+
+|  |  |    |    |    |  |  |
++--+--+----+----+----+--+--+
+|  |  |    |    |    |  |  |
++--+--+----+----+----+--+--+
+|  |  |    |    |    |  |  |
++--+--+----+----+----+--+--+
+|  |  |    |    |    |  |  |
++--+--+----+----+----+--+--+
+```
+
+#### 注意
+各シートは**書式なし**で記入してください。
+Excelファイルのフォントを変えたり、枠線を付けたりすると、うまく動作しません。  
+書式をクリアするには、`すべてのセルを選択 -> ホームタブ -> クリア -> 書式のクリア`
+の手順を辿ってください。
+
+
+### 実行する
+設定ファイルを適切な位置に置き、`seat_changer.py`を実行します。
+
+```bash
+python seat_changer.py
+```
+
+あるいは`seat_changer.exe`を持っている場合は、ダブルクリックまたはコマンドプロンプトから実行してください(Windows)。
+
+設定ファイルのパスを指定するように求められるので、入力してください。
+実行は数秒～数十秒で終わります。
+
+## 出力
+出力は、指定した設定ファイルの新しいシートに記入されます。例えば、以下のようなものです。  
+具体的には`setting/result_sample.xlsx`を参照してください。
+
+#### `result_members`シート
+`members`シートに、座席結果を追加した形で出力します。
+
+```text
++--------+-------------+-------+---------+-----------+
+|        |             |       |         |           |
++--------+-------------+-------+---------+-----------+
+| number | name        | hopes | glasses | mem_place |
++--------+-------------+-------+---------+-----------+
+| 1      | 川野 洵子   | C2    | 1       | C2        |
++--------+-------------+-------+---------+-----------+
+| 2      | 堀江 銀之助 | A3,A4 | 0       | A5        |
++--------+-------------+-------+---------+-----------+
+| 3      | 浜田 大夢   | D6    | 0       | D7        |
++--------+-------------+-------+---------+-----------+
+| 4      | 新谷 一智   | B3    | 0       | B3        |
++--------+-------------+-------+---------+-----------+
+|        |             |       |         |           |
++--------+-------------+-------+---------+-----------+
+```
+
+`mem_place`列が座席結果です。  
+1行目が空白なのは仕様です。
+
+#### `result_num_map`シート
+座席結果を出席番号であらわしたものです。
+
+```text
++----+----+----+----+----+----+----+
+|    | 19 | 10 | 23 | 24 | 44 |    |
++----+----+----+----+----+----+----+
+| 26 | 11 | 1  | 43 | 36 | 45 | 7  |
++----+----+----+----+----+----+----+
+| 12 | 4  | 39 | 17 | 32 | 31 | 14 |
++----+----+----+----+----+----+----+
+| 27 | 41 | 46 | 33 | 30 | 42 | 47 |
++----+----+----+----+----+----+----+
+| 2  | 18 | 40 | 34 | 16 | 37 | 13 |
++----+----+----+----+----+----+----+
+| 5  | 22 | 20 | 35 | 38 | 28 | 8  |
++----+----+----+----+----+----+----+
+| 6  | 21 | 25 | 3  | 9  | 29 | 15 |
++----+----+----+----+----+----+----+
+```
+
+#### `result_name_map`シート
+座席結果を名前であらわしたものです。
+
+```text
++-------------+-------------+-----------+-----------+-------------+---------------------------+
+|            | 武藤 順子   | 宮内 彰揮 | 深沢 則重 | 村井 準一郎 | 村井 佐十郎 |           |
++-------------+-------------+-----------+-----------+-------------+-------------+-------------+
+| 塚本 研五   | 高島 理絵   | 川野 洵子 | 若林 亜依 | 野沢 邦江   | 田上 孝成   | 松浦 健也   |
++-------------+-------------+-----------+-----------+-------------+-------------+-------------+
+| 杉本 真知子 | 新谷 一智   | 工藤 宏幸 | 高橋 洋和 | 長沢 克     | 久保 多栄子 | 森山 美貴   |
++-------------+-------------+-----------+-----------+-------------+-------------+-------------+
+| 石田 美津江 | 清水 征二郎 | 藤沢 利克 | 阿部 里香 | 荻野 惣之助 | 長野 菊治   | 藤村 英則   |
++-------------+-------------+-----------+-----------+-------------+-------------+-------------+
+| 堀江 銀之助 | 滝沢 準一郎 | 新田 俊憲 | 寺田 保平 | 福井 和広   | 高松 有     | 阿部 十三男 |
++-------------+-------------+-----------+-----------+-------------+-------------+-------------+
+| 杉浦 美次   | 大西 竹義   | 吉田 久紀 | 茂木 信好 | 藤田 利克   | 中沢 元臣   | 樋口 繁美   |
++-------------+-------------+-----------+-----------+-------------+-------------+-------------+
+| 池田 秀一   | 小山 好利   | 中谷 雅栄 | 浜田 大夢 | 中尾 秋代   | 広瀬 正輝   | 田口 直武   |
++-------------+-------------+-----------+-----------+-------------+-------------+-------------+
+```
+
+#### `result_loss`シート
+希望の座席と実際の座席が"どのくらい離れているか"をあらわす指標です。
+この数値があまりにも大きい場合（10000以上）、前席考慮がうまくいっていないので、
+確認し、実行しなおしてください。
 
 ## Q&A
 
