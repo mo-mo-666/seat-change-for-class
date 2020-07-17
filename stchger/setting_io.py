@@ -29,24 +29,27 @@ def read_setting(path: str, is_hopes: bool = True, read_glasses: bool = True) ->
         glasses_desks_s = wb["glasses_desks"]
         for row in glasses_desks_s.iter_rows(values_only=True):
             for cell in row:
-                v = str(cell).strip()
-                if v and v in name_coord:
-                    glasses_desks.append(name_coord[v])
+                if cell:
+                    v = str(cell).strip()
+                    if v and v in name_coord:
+                        glasses_desks.append(name_coord[v])
         datas["glasses_desks"] = glasses_desks
 
     # read members sheet
     key = []
     for cell in members_s["2"]:
-        v = str(cell.value).strip()
+        v = cell.value
         if v:
-            key.append(v)
+            v = str(v).strip()
+            if v:
+                key.append(v)
     datas["member_keys"] = key
 
     members_d = []
     for row in members_s.iter_rows(min_row=3, values_only=True):
         member = {}
         for i, (k, v) in enumerate(zip(key, row)):
-            v = str(v).strip()
+            v = str(v).strip() if v is not None else None
             if i == 0 and not v:
                 break
             member[k] = v
@@ -58,14 +61,14 @@ def read_setting(path: str, is_hopes: bool = True, read_glasses: bool = True) ->
     if is_hopes:
         members_rd = []
         for member in members_d:
-            hopes = member["hopes"].split(",")
+            hopes = member["hopes"].split(",") if member["hopes"] else ()
             hopes = tuple([name_coord[h] for h in hopes])
             member["hopes"] = hopes
             if read_glasses:
-                if member["glasses"] == "0":
-                    member["glasses"] = ()
-                else:
+                if member["glasses"] == "1":
                     member["glasses"] = glasses_desks
+                else:
+                    member["glasses"] = ()
             members_rd.append(member)
         datas["members"] = members_rd
     else:
@@ -89,7 +92,7 @@ def write_setting(path: str, datas: dict):
     loss_log = datas["loss_log"]
 
     # write member list
-    ws = wb.create_sheet("result_member")
+    ws = wb.create_sheet("result_members")
     for i, k in enumerate(member_keys, start=1):
         ws.cell(row=2, column=i, value=k)
     for i, k in enumerate(member_keys, start=1):

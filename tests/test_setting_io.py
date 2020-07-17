@@ -44,9 +44,9 @@ class TestReadSetting(unittest.TestCase):
             hopes = m["hopes"]
             glass = m["glasses"]
             self.assertEqual(i, num)
-            if i == 1:
-                self.assertEqual(name, "川野 洵子")
-                self.assertEqual(hopes, ((1, 2),))
+            if i == 14:
+                self.assertEqual(name, "森山 美貴")
+                self.assertEqual(hopes, ((6, 6),))
                 self.assertEqual(glass, ())
             if i == 39:
                 self.assertEqual(name, "工藤 宏幸")
