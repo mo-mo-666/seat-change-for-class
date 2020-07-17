@@ -4,17 +4,17 @@ from .loss import HopeLoss, GlassesLoss
 from .changer import SeatChanger
 
 import os
-from typing import Tuple, Sequence
+from typing import Tuple, Sequence, List
 
 
-def solve(seat_places: Sequence[Tuple[int, int]], members: dict):
+def solve(seat_places: Sequence[Tuple[int, int]], members: Sequence[dict]) -> Tuple[Tuple[Tuple[int, int]], List[float]]:
 
     hope_loss = HopeLoss(metric="euclid", power=2)
     glasses_loss = GlassesLoss(weight=10000)
     seat_chger = SeatChanger(
         losses=[hope_loss, glasses_loss],
         initializer=RandomInitializer(),
-        iter_num=100000,
+        iter_num=50000,
         ch_step_range=(2, 4),
     )
     mem_places = seat_chger.solve(seat_places, members)
