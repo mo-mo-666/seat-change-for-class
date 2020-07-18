@@ -1,8 +1,11 @@
 # 席替え
-
+![python](https://img.shields.io/badge/python-3.7|3.8-blue.svg)
 ![test](https://github.com/mo-mo-666/seat-change-for-class/workflows/test/badge.svg)
+![Pyinstaller](https://github.com/mo-mo-666/seat-change-for-class/workflows/Pyinstaller/badge.svg)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE.txt)
 
-一つのクラスにおいて、生徒の希望に応じて席替えを行うアプリケーションです。
+一つのクラスにおいて、生徒の希望に応じて席替えを行うアプリケーションです。  
+Seat Changer, Seat Selector
 
 ## 機能
 
@@ -208,8 +211,8 @@ python seat_changer.py
 
 - 設定ファイルで、各セルに余計なスペースが入っていないか  
 設定ファイルを読み取る際、スペースも文字として認識されます。特に座席希望や座席配置を記入する際、
-末尾、あるいはカンマ区切りの途中でスペースが入っていないかや、空白のセルに
-余計なスペースがないかを確認してください。
+末尾、あるいはカンマ区切りの途中でスペースが入っていないかや、
+空白のセルに余計なスペースがないかを確認してください。
 
 - 設定ファイルで、`members`シートの2行目を変更していないか  
 `members`シートの2行目を変更した場合、うまく実行されません。左から順に
@@ -217,6 +220,9 @@ python seat_changer.py
 
 - 生徒数と座席の数が一致しているか  
 `members`シートで記入した生徒数と`desks_map`シートでの座席数は同数でなければなりません。
+
+- 設定ファイルの`members`シート、`glasses_desks`シートで、`desks_map`シートにない座席を指定している  
+`desks_map`シートにある座席以外を`glasses_desks`シートや、`members`シートの`hope`列で指定してはいけません。
 
 - 実行の際、設定ファイルがないといわれてしまう  
 設定ファイルはカレントディレクトリからの相対パスで指定してください。`seat_changer.exe`をダブルクリックで
@@ -236,3 +242,4 @@ python seat_changer.py
 MIT  
 ……加筆・書き換え・再配布・商用利用など無制限に利用可能。
 ただし、作者または著作権者は、ソフトウェアに関してなんら責任を負わない。
+詳しくは[LICENSE.txt](./LICENSE.txt)を参照のこと。
