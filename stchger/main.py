@@ -7,7 +7,9 @@ import os
 from typing import Tuple, Sequence, List
 
 
-def solve(seat_places: Sequence[Tuple[int, int]], members: Sequence[dict]) -> Tuple[Tuple[Tuple[int, int]], List[float]]:
+def solve(
+    seat_places: Sequence[Tuple[int, int]], members: Sequence[dict]
+) -> Tuple[Tuple[Tuple[int, int]], List[float]]:
 
     hope_loss = HopeLoss(metric="euclid", power=2)
     glasses_loss = GlassesLoss(weight=10000)
