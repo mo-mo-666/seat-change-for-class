@@ -1,5 +1,5 @@
 import random
-from typing import Iterable, Union, Tuple, List, Sequence
+from typing import Iterable, Tuple, List, Sequence
 from .initializer import RandomInitializer
 
 

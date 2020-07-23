@@ -6,7 +6,7 @@ from stchger.setting_io import read_setting
 
 class TestReadSetting(unittest.TestCase):
     def setUp(self):
-        self.datas = read_setting("tests/test_data.xlsx")
+        self.datas = read_setting("tests/test_data_v1.1.xlsx")
         self.glasses_desks_ans = set(
             [(3, 1), (3, 2), (3, 3), (4, 1), (4, 2), (4, 3), (5, 1), (5, 2), (5, 3)]
         )
@@ -43,12 +43,15 @@ class TestReadSetting(unittest.TestCase):
             name = m["name"]
             hopes = m["hopes"]
             glass = m["glasses"]
+            weight = m["hope_weight"]
             self.assertEqual(i, num)
             if i == 14:
                 self.assertEqual(name, "森山 美貴")
-                self.assertEqual(hopes, ((6, 6),))
+                self.assertEqual(hopes, ((7, 3),))
                 self.assertEqual(glass, ())
+                self.assertAlmostEqual(weight, 46)
             if i == 39:
                 self.assertEqual(name, "工藤 宏幸")
                 self.assertEqual(hopes, ((3, 1), (3, 2), (3, 3)))
                 self.assertEqual(set(glass), self.glasses_desks_ans)
+                self.assertAlmostEqual(weight, 9)

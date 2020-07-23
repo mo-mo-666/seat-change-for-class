@@ -1,10 +1,6 @@
 import copy
 from abc import ABC, abstractmethod
-from logging import getLogger
 from typing import Sequence, Tuple, List
-
-
-logger = getLogger(__name__)
 
 
 class AbstractLoss(ABC):
@@ -108,6 +104,23 @@ class HopeLoss(AbstractLoss):
                 raise KeyError("Some member does not have 'hopes' key.")
             else:
                 loss += self._cal_one(hopes, place) ** self.power
+        return loss
+
+
+class WeightedHopeLoss(HopeLoss):
+    def __call__(
+        self,
+        seat_places: Sequence[Tuple[int, int]],
+        members: Sequence[dict],
+        mem_places: List[Tuple[int, int]],
+    ) -> float:
+        loss = 0
+        for mem, place in zip(members, mem_places):
+            hopes = mem.get("hopes", -1)
+            if hopes == -1:
+                raise KeyError("Some member does not have 'hopes' key.")
+            weight = mem.get("hope_weight", 1)
+            loss += (self._cal_one(hopes, place) ** self.power) * weight
         return loss
 
 
