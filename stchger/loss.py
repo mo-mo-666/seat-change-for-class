@@ -29,7 +29,7 @@ class AbstractLoss(ABC):
         seat_places : Sequence[Tuple[int, int]]
             All seat places.
         members : Sequence[dict]
-            Members, i.e., students.
+            Members, such as students.
         mem_places : List[Tuple[int, int]]
             Members' seat places.
 
@@ -52,6 +52,16 @@ class HopeLoss(AbstractLoss):
     """
 
     def __init__(self, metric: str = "euclid", power: int = 2):
+        """
+        Hope loss setting.
+
+        Parameters
+        ----------
+        metric : euclid | manhattan
+             metric setting used when calculating the loss, by default "euclid"
+        power : int, optional
+            loss = metric ** power, by default 2
+        """
         super().__init__()
         metrics = ["manhattan", "euclid"]
         if metric not in metrics:
@@ -67,6 +77,21 @@ class HopeLoss(AbstractLoss):
     def _manhattan_cal_one(
         self, hopes: Sequence[Tuple[int, int]], mem_place: Tuple[int, int]
     ) -> float:
+        """
+        Calculate manhattan (L^1) loss of one member.
+
+        Parameters
+        ----------
+        hopes : Sequence[Tuple[int, int]]
+            Members' hopes.
+        mem_place : Tuple[int, int]
+            Current members' places.
+
+        Returns
+        -------
+        float
+            Loss value.
+        """
         if not hopes:
             return 0.0
         loss = min(
@@ -80,6 +105,21 @@ class HopeLoss(AbstractLoss):
     def _euclid_cal_one(
         self, hopes: Sequence[Tuple[int, int]], mem_place: Tuple[int, int]
     ) -> float:
+        """
+        Calculate euclid (L^2) loss of one member.
+
+        Parameters
+        ----------
+        hopes : Sequence[Tuple[int, int]]
+            Members' hopes.
+        mem_place : Tuple[int, int]
+            Current members' places.
+
+        Returns
+        -------
+        float
+            Loss value.
+        """
         if not hopes:
             return 0.0
         loss = min(
@@ -97,6 +137,23 @@ class HopeLoss(AbstractLoss):
         members: Sequence[dict],
         mem_places: List[Tuple[int, int]],
     ) -> float:
+        """
+        Calculate loss.
+
+        Parameters
+        ----------
+        seat_places : Sequence[Tuple[int, int]]
+            All seat places.
+        members : Sequence[dict]
+            Members, such as students.
+        mem_places : List[Tuple[int, int]]
+            Members' seat places.
+
+        Returns
+        -------
+        float
+            The loss value.
+        """
         loss = 0
         for mem, place in zip(members, mem_places):
             hopes = mem.get("hopes", -1)
@@ -108,12 +165,38 @@ class HopeLoss(AbstractLoss):
 
 
 class WeightedHopeLoss(HopeLoss):
+    """
+    Weighted hope loss.
+
+    Note
+    ----------
+    Member directories must have 'hopes' and 'hope_weight key.
+    member['hopes'] == Sequence[Tuple[int, int]].
+    member['hope_weight'] = float.
+    """
     def __call__(
         self,
         seat_places: Sequence[Tuple[int, int]],
         members: Sequence[dict],
         mem_places: List[Tuple[int, int]],
     ) -> float:
+        """
+        Calculate loss.
+
+        Parameters
+        ----------
+        seat_places : Sequence[Tuple[int, int]]
+            All seat places.
+        members : Sequence[dict]
+            Members, such as students.
+        mem_places : List[Tuple[int, int]]
+            Members' seat places.
+
+        Returns
+        -------
+        float
+            The loss value.
+        """
         loss = 0
         for mem, place in zip(members, mem_places):
             hopes = mem.get("hopes", -1)
@@ -135,12 +218,35 @@ class GlassesLoss(AbstractLoss):
     """
 
     def __init__(self, weight: float = 10000):
+        """
+        Set parameter.
+
+        Parameters
+        ----------
+        weight : float, optional
+            the weight, by default 10000
+        """
         super().__init__()
         self.weight = weight
 
     def _cal_one(
         self, glasses: Sequence[Tuple[int, int]], mem_place: Tuple[int, int]
     ) -> float:
+        """
+        Calculate one member's loss.
+
+        Parameters
+        ----------
+        glasses : Sequence[Tuple[int, int]]
+            Glasses desks for the member.
+        mem_place : Tuple[int, int]
+            The member's place.
+
+        Returns
+        -------
+        float
+            The loss value.
+        """
         if not glasses:
             return 0
         return (mem_place not in glasses) * self.weight
@@ -151,6 +257,23 @@ class GlassesLoss(AbstractLoss):
         members: Sequence[dict],
         mem_places: List[Tuple[int, int]],
     ) -> float:
+        """
+        Calculate loss.
+
+        Parameters
+        ----------
+        seat_places : Sequence[Tuple[int, int]]
+            All seat places.
+        members : Sequence[dict]
+            Members, such as students.
+        mem_places : List[Tuple[int, int]]
+            Members' seat places.
+
+        Returns
+        -------
+        float
+            The loss value.
+        """
         loss = 0
         for mem, place in zip(members, mem_places):
             glasses = mem.get("glasses", -1)

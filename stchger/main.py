@@ -10,6 +10,22 @@ from typing import Tuple, Sequence, List
 def solve(
     seat_places: Sequence[Tuple[int, int]], members: Sequence[dict]
 ) -> Tuple[Tuple[Tuple[int, int]], List[float]]:
+    """
+    Solve pipeline
+
+    Parameters
+    ----------
+    seat_places : Sequence[Tuple[int, int]]
+        Seat places.
+    members : Sequence[dict]
+        Members' directories
+
+    Returns
+    -------
+    Tuple[Tuple[Tuple[int, int]], List[float]]
+        mem_places, loss_log
+        Places of members and loss_logs.
+    """
 
     hope_loss = WeightedHopeLoss(metric="euclid", power=2)
     glasses_loss = GlassesLoss(weight=1000000)
@@ -17,7 +33,7 @@ def solve(
         losses=[hope_loss, glasses_loss],
         initializer=RandomInitializer(),
         iter_num=100000,
-        ch_step_range=(2, 4),
+        ch_step_range=(2, 5),
     )
     mem_places = seat_chger.solve(seat_places, members)
     loss_log = seat_chger.loss_log
@@ -25,6 +41,16 @@ def solve(
 
 
 def pipeline(setting_path: str, write_path: str):
+    """
+    Whole pipeline
+
+    Parameters
+    ----------
+    setting_path : str
+        Path to setting file.
+    write_path : str
+        Path to writing file.
+    """
     # read data
     datas = read_setting(setting_path)
     members = datas["members"]
@@ -43,6 +69,14 @@ def pipeline(setting_path: str, write_path: str):
 
 
 def read_args() -> Tuple[str, str]:
+    """
+    Read argument.
+
+    Returns
+    -------
+    Tuple[str, str]
+        setting_path, write_path
+    """
     while True:
         setting_path = input("設定ファイルのパスを指定してください：")
         if not setting_path or not os.path.exists(setting_path):
