@@ -239,8 +239,8 @@ python seat_changer.py
 空白のセルに余計なスペースがないかを確認してください。
 
 - 設定ファイルで、`members`シートの2行目を変更していないか  
-`members`シートの2行目を変更した場合、うまく実行されません。左から順に
-`number, name, hopes, glasses`としてください。
+`members`シートの2行目を変更した場合、うまく実行されません。
+`number, name, hopes, glasses, (hope_weight)`（順不同）としてください。
 
 - 生徒数と座席の数が一致しているか  
 `members`シートで記入した生徒数と`desks_map`シートでの座席数は同数でなければなりません。
