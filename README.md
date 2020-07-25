@@ -1,8 +1,8 @@
 # 席替え
 ![release](https://img.shields.io/github/v/release/mo-mo-666/seat-change-for-class)
+![python](https://img.shields.io/badge/python-3.7|3.8-blue.svg)
 ![test](https://github.com/mo-mo-666/seat-change-for-class/workflows/test/badge.svg)
 ![Pyinstaller](https://github.com/mo-mo-666/seat-change-for-class/workflows/Pyinstaller/badge.svg)
-![python](https://img.shields.io/badge/python-3.7|3.8-blue.svg)
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.txt)
 
 1つのクラスにおいて、生徒の希望に応じて席替えを行うアプリケーションです。  
@@ -269,6 +269,9 @@ python seat_changer.py
   - 乱数を用いて、メンバーを数人入れ替え、再び損失を計算する
   - 2つの損失を比較し、損失が小さい方を採用する。
   - 上の2つを全部で100000回繰り返す
+
+- 座席は複数希望すると、希望が叶う確率は上がるのでしょうか  
+複数希望した場合、ユークリッド距離は最小のものが採用されるため、必ずしもそうとは限りません。
 
 
 ## 応用
