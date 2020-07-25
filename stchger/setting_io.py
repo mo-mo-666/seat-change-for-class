@@ -54,6 +54,10 @@ def read_setting(path: str, is_hopes: bool = True, read_glasses: bool = True) ->
                 break
             member[k] = v
         member["number"] = int(member["number"])
+        if member.get("hope_weight", None) is None:
+            member["hope_weight"] = 1.0
+        else:
+            member["hope_weight"] = float(member["hope_weight"])
         members_d.append(member)
 
     # reformat member data
