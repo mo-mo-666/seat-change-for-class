@@ -1,6 +1,6 @@
 import copy
 from abc import ABC, abstractmethod
-from typing import Sequence, Tuple, List
+from typing import Sequence
 
 
 class AbstractLoss(ABC):
@@ -17,20 +17,20 @@ class AbstractLoss(ABC):
     @abstractmethod
     def __call__(
         self,
-        seat_places: Sequence[Tuple[int, int]],
+        seat_places: Sequence[tuple[int, int]],
         members: Sequence[dict],
-        mem_places: List[Tuple[int, int]],
+        mem_places: list[tuple[int, int]],
     ) -> float:
         """
         Calculate loss.
 
         Parameters
         ----------
-        seat_places : Sequence[Tuple[int, int]]
+        seat_places : Sequence[tuple[int, int]]
             All seat places.
         members : Sequence[dict]
             Members, such as students.
-        mem_places : List[Tuple[int, int]]
+        mem_places : list[tuple[int, int]]
             Members' seat places.
 
         Returns
@@ -48,7 +48,7 @@ class HopeLoss(AbstractLoss):
     Note
     ----------
     Member directories must have 'hopes' key.
-    member['hopes'] == Sequence[Tuple[int, int]].
+    member['hopes'] == Sequence[tuple[int, int]].
     """
 
     def __init__(self, metric: str = "euclid", power: int = 2):
@@ -75,16 +75,16 @@ class HopeLoss(AbstractLoss):
             self._cal_one = self._euclid_cal_one
 
     def _manhattan_cal_one(
-        self, hopes: Sequence[Tuple[int, int]], mem_place: Tuple[int, int]
+        self, hopes: Sequence[tuple[int, int]], mem_place: tuple[int, int]
     ) -> float:
         """
         Calculate manhattan (L^1) loss of one member.
 
         Parameters
         ----------
-        hopes : Sequence[Tuple[int, int]]
+        hopes : Sequence[tuple[int, int]]
             Members' hopes.
-        mem_place : Tuple[int, int]
+        mem_place : tuple[int, int]
             Current members' places.
 
         Returns
@@ -103,16 +103,16 @@ class HopeLoss(AbstractLoss):
         return loss
 
     def _euclid_cal_one(
-        self, hopes: Sequence[Tuple[int, int]], mem_place: Tuple[int, int]
+        self, hopes: Sequence[tuple[int, int]], mem_place: tuple[int, int]
     ) -> float:
         """
         Calculate euclid (L^2) loss of one member.
 
         Parameters
         ----------
-        hopes : Sequence[Tuple[int, int]]
+        hopes : Sequence[tuple[int, int]]
             Members' hopes.
-        mem_place : Tuple[int, int]
+        mem_place : tuple[int, int]
             Current members' places.
 
         Returns
@@ -133,20 +133,20 @@ class HopeLoss(AbstractLoss):
 
     def __call__(
         self,
-        seat_places: Sequence[Tuple[int, int]],
+        seat_places: Sequence[tuple[int, int]],
         members: Sequence[dict],
-        mem_places: List[Tuple[int, int]],
+        mem_places: list[tuple[int, int]],
     ) -> float:
         """
         Calculate loss.
 
         Parameters
         ----------
-        seat_places : Sequence[Tuple[int, int]]
+        seat_places : Sequence[tuple[int, int]]
             All seat places.
         members : Sequence[dict]
             Members, such as students.
-        mem_places : List[Tuple[int, int]]
+        mem_places : list[tuple[int, int]]
             Members' seat places.
 
         Returns
@@ -171,25 +171,25 @@ class WeightedHopeLoss(HopeLoss):
     Note
     ----------
     Member directories must have 'hopes' and 'hope_weight key.
-    member['hopes'] == Sequence[Tuple[int, int]].
+    member['hopes'] == Sequence[tuple[int, int]].
     member['hope_weight'] = float.
     """
     def __call__(
         self,
-        seat_places: Sequence[Tuple[int, int]],
+        seat_places: Sequence[tuple[int, int]],
         members: Sequence[dict],
-        mem_places: List[Tuple[int, int]],
+        mem_places: list[tuple[int, int]],
     ) -> float:
         """
         Calculate loss.
 
         Parameters
         ----------
-        seat_places : Sequence[Tuple[int, int]]
+        seat_places : Sequence[tuple[int, int]]
             All seat places.
         members : Sequence[dict]
             Members, such as students.
-        mem_places : List[Tuple[int, int]]
+        mem_places : list[tuple[int, int]]
             Members' seat places.
 
         Returns
@@ -214,7 +214,7 @@ class GlassesLoss(AbstractLoss):
     Note
     ----------
     Member directories must have 'glasses' key.
-    member['glasses'] == Sequence[Tuple[int, int]].
+    member['glasses'] == Sequence[tuple[int, int]].
     """
 
     def __init__(self, weight: float = 10000):
@@ -230,16 +230,16 @@ class GlassesLoss(AbstractLoss):
         self.weight = weight
 
     def _cal_one(
-        self, glasses: Sequence[Tuple[int, int]], mem_place: Tuple[int, int]
+        self, glasses: Sequence[tuple[int, int]], mem_place: tuple[int, int]
     ) -> float:
         """
         Calculate one member's loss.
 
         Parameters
         ----------
-        glasses : Sequence[Tuple[int, int]]
+        glasses : Sequence[tuple[int, int]]
             Glasses desks for the member.
-        mem_place : Tuple[int, int]
+        mem_place : tuple[int, int]
             The member's place.
 
         Returns
@@ -253,20 +253,20 @@ class GlassesLoss(AbstractLoss):
 
     def __call__(
         self,
-        seat_places: Sequence[Tuple[int, int]],
+        seat_places: Sequence[tuple[int, int]],
         members: Sequence[dict],
-        mem_places: List[Tuple[int, int]],
+        mem_places: list[tuple[int, int]],
     ) -> float:
         """
         Calculate loss.
 
         Parameters
         ----------
-        seat_places : Sequence[Tuple[int, int]]
+        seat_places : Sequence[tuple[int, int]]
             All seat places.
         members : Sequence[dict]
             Members, such as students.
-        mem_places : List[Tuple[int, int]]
+        mem_places : list[tuple[int, int]]
             Members' seat places.
 
         Returns

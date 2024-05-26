@@ -1,5 +1,5 @@
 import random
-from typing import Iterable, Tuple, List, Sequence
+from typing import Iterable, Sequence
 from .initializer import RandomInitializer
 
 
@@ -13,7 +13,7 @@ class SeatChanger:
         losses: Iterable[object],
         initializer: object = RandomInitializer(),
         iter_num: int = 10000,
-        ch_step_range: Tuple[int, int] = (2, 4),
+        ch_step_range: tuple[int, int] = (2, 4),
     ):
         """
         Parameters
@@ -27,7 +27,7 @@ class SeatChanger:
         iter_num : int, optional
             The number of iteration, by default 10000.
 
-        ch_step_range : Tuple[int, int], optional
+        ch_step_range : tuple[int, int], optional
             The number of people to interchange in one step, by default (2, 4).
         """
         self.losses = losses
@@ -37,19 +37,19 @@ class SeatChanger:
         self.loss_log = []
 
     def change_one(
-        self, mem_places: Sequence[Tuple[int, int]]
-    ) -> List[Tuple[int, int]]:
+        self, mem_places: Sequence[tuple[int, int]]
+    ) -> list[tuple[int, int]]:
         """
         One step change of the member's place.
 
         Parameters
         ----------
-        mem_places : Sequence[Tuple[int, int]]
+        mem_places : Sequence[tuple[int, int]]
             The place of the members.
 
         Returns
         -------
-        List[Tuple[int, int]]
+        list[tuple[int, int]]
             The new place of the members.
         """
         num = len(mem_places)
@@ -67,22 +67,22 @@ class SeatChanger:
 
     def cal_loss(
         self,
-        seat_places: Sequence[Tuple[int, int]],
+        seat_places: Sequence[tuple[int, int]],
         members: Sequence[dict],
-        mem_places: Sequence[Tuple[int, int]],
+        mem_places: Sequence[tuple[int, int]],
     ) -> float:
         """
         Calculate loss using loss instances.
 
         Parameters
         ----------
-        seat_places : Sequence[Tuple[int, int]]
+        seat_places : Sequence[tuple[int, int]]
             The places of seats.
 
         members : Sequence[dict]
             Member list.
 
-        mem_places : Sequence[Tuple[int, int]]
+        mem_places : Sequence[tuple[int, int]]
             The place of members.
 
         Returns
@@ -96,14 +96,14 @@ class SeatChanger:
         return loss
 
     def solve(
-        self, seat_places: Sequence[Tuple[int, int]], members: Sequence[dict]
-    ) -> Tuple[Tuple[int, int]]:
+        self, seat_places: Sequence[tuple[int, int]], members: Sequence[dict]
+    ) -> tuple[tuple[int, int]]:
         """
         Search the appropriate seat place of each member.
 
         Parameters
         ----------
-        seat_places : Sequence[Tuple[int, int]]
+        seat_places : Sequence[tuple[int, int]]
             The place of seats.
 
         members : Sequence[dict]
@@ -111,7 +111,7 @@ class SeatChanger:
 
         Returns
         -------
-        List[Tuple[int, int]]
+        list[tuple[int, int]]
             The place of members.
         """
         self.loss_log = []

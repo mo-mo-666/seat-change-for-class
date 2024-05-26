@@ -1,6 +1,6 @@
 # 席替え
 ![release](https://img.shields.io/github/v/release/mo-mo-666/seat-change-for-class)
-![python](https://img.shields.io/badge/python-3.7|3.8-blue.svg)
+![python](https://img.shields.io/badge/python-3.12-blue.svg)
 ![test](https://github.com/mo-mo-666/seat-change-for-class/workflows/test/badge.svg)
 ![Pyinstaller](https://github.com/mo-mo-666/seat-change-for-class/workflows/Pyinstaller/badge.svg)
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.txt)

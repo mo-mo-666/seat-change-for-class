@@ -4,25 +4,25 @@ from .loss import WeightedHopeLoss, GlassesLoss
 from .changer import SeatChanger
 
 import os
-from typing import Tuple, Sequence, List
+from typing import Sequence
 
 
 def solve(
-    seat_places: Sequence[Tuple[int, int]], members: Sequence[dict]
-) -> Tuple[Tuple[Tuple[int, int]], List[float]]:
+    seat_places: Sequence[tuple[int, int]], members: Sequence[dict]
+) -> tuple[tuple[tuple[int, int]], list[float]]:
     """
     Solve pipeline
 
     Parameters
     ----------
-    seat_places : Sequence[Tuple[int, int]]
+    seat_places : Sequence[tuple[int, int]]
         Seat places.
     members : Sequence[dict]
         Members' directories
 
     Returns
     -------
-    Tuple[Tuple[Tuple[int, int]], List[float]]
+    tuple[tuple[tuple[int, int]], list[float]]
         mem_places, loss_log
         Places of members and loss_logs.
     """
@@ -68,13 +68,13 @@ def pipeline(setting_path: str, write_path: str):
     write_setting(write_path, datas)
 
 
-def read_args() -> Tuple[str, str]:
+def read_args() -> tuple[str, str]:
     """
     Read argument.
 
     Returns
     -------
-    Tuple[str, str]
+    tuple[str, str]
         setting_path, write_path
     """
     while True:

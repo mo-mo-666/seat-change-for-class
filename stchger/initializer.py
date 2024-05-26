@@ -1,6 +1,6 @@
 import random
 from abc import ABC, abstractmethod
-from typing import Sequence, Tuple, List
+from typing import Sequence
 
 
 class AbstractInitializer(ABC):
@@ -12,7 +12,7 @@ class AbstractInitializer(ABC):
 
     @abstractmethod
     def __call__(
-        self, seat_places: Sequence[Tuple[int, int]], members: Sequence[dict]
+        self, seat_places: Sequence[tuple[int, int]], members: Sequence[dict]
     ) -> float:
         raise NotImplementedError("This method must be override and return float.")
 
@@ -22,8 +22,8 @@ class RandomInitializer(AbstractInitializer):
         super().__init__()
 
     def __call__(
-        self, seat_places: Sequence[Tuple[int, int]], members: Sequence[dict]
-    ) -> List[Tuple[int, int]]:
+        self, seat_places: Sequence[tuple[int, int]], members: Sequence[dict]
+    ) -> list[tuple[int, int]]:
         mem_places = random.sample(seat_places, len(members))
         return mem_places
 
@@ -41,7 +41,7 @@ class RandomGlassesInitializer(AbstractInitializer):
         super().__init__()
 
     def __call__(
-        self, seat_places: Sequence[Tuple[int, int]], members: Sequence[dict]
-    ) -> List[Tuple[int, int]]:
+        self, seat_places: Sequence[tuple[int, int]], members: Sequence[dict]
+    ) -> list[tuple[int, int]]:
         # TODO write this
         pass
