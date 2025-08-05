@@ -2,8 +2,6 @@ import enum
 import openpyxl
 import os
 
-from openpyxl.utils.cell import col
-
 
 def read_setting(path: str, is_hopes: bool = True, read_glasses: bool = True) -> dict:
     wb = openpyxl.load_workbook(path, read_only=True)
